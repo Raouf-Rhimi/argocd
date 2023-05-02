@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: astonvilla-app
 spec:
-  replicas: 0
+  replicas: 3
   selector:
     matchLabels:
       app: astonvilla-app
