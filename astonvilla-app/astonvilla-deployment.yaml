@@ -17,5 +17,5 @@ spec:
         image: kakachisensei/astonvilla-app
         ports:
         - containerPort: 80
-      imagePullSecrets:
-        - name: regcred
+#      imagePullSecrets:
+ #       - name: regcred
