@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
       - name: astonvilla-app
-        image: kakachisensei/astonvilla-app
+        image: kakachisensei/astonvilla-app:latest
         ports:
         - containerPort: 80
-#      imagePullSecrets:
- #       - name: regcred
+      imagePullSecrets:
+        - name: regcred
