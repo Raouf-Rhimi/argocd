@@ -22,7 +22,7 @@ pipeline {
                         def newImageTag = '1.1.0'
                         deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/astonvilla-app:${newImageTag}")
                         writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
-                        git credentialsId: 'dockerhub', url: 'https://github.com/kakachiSensei/k8s-manifests.git'
+                        git credentialsId: 'dockerhub', url: 'https://kakachiSensei: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@github.com/kakachiSensei/k8s-manifests.git'
                         gitPush()
                     }
                 }                
