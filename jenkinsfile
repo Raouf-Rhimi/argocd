@@ -22,21 +22,9 @@ pipeline {
                         def newImageTag = '1.1.0'
                         deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/astonvilla-app:${newImageTag}")
                         writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
-                        bat "git add astonvilla-deployment.yaml"
-                        bat """
-                        git commit -m "updated version"
-                        git push -u origin
-                        """
+                        git credentialsId: 'dockerhub', url: 'https://github.com/kakachiSensei/k8s-manifests.git'
+                        gitPush()
                     }
-                }                
-            }
-        }
-        stage ("push to repository") {
-            steps {
-                 dir("k8s-manifests/astonvilla-app"){
-                    git add astonvilla-deployment.yaml
-                    git commit -m "updated version"
-                    git push -u origin master
                 }                
             }
         }
