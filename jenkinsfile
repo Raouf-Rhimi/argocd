@@ -16,7 +16,7 @@ pipeline {
         }
         stage ("update image tag") {
             steps {
-                 dir("k8s-manifest"){
+                 dir("k8s-manifests"){
                     script {
                         bat "cd astonvilla-app"
                         def deploymentFile = readFile('astonvilla-deployment.yaml')
