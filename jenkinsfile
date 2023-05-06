@@ -3,10 +3,6 @@ pipeline {
     environment {
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
 	}
-    tools { 
-        maven 'maven'
-        nodejs '14.17.6'
-    }
     stages {
         stage ("Clean up"){
             steps {
@@ -15,27 +11,14 @@ pipeline {
         }
         stage ("Clone repo"){
             steps {
-                bat "git clone https://kakachiSensei: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@github.com/kakachiSensei/astonvilla-app.git"
+                bat "git clone https://kakachiSensei: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@github.com/kakachiSensei/k8s-manifests.git"
             }
         }
         stage ("generate docker image") {
             steps {
-                 dir("astonvilla-app"){
-                    bat "docker build -t kakachisensei/astonvilla-app:1.1.${env.BUILD_NUMBER} ."
+                 dir("k8s-manifest"){
+                   bat "tree"
                 }                
             }
         }
-        stage ("Login to dockerhub") {
-			steps {
-				bat "docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW "
-			}
-		}
-        stage ("push docker image") {
-            steps {
-                 dir("astonvilla-app"){
-                    bat "docker push kakachisensei/astonvilla-app"
-                }                
-            }
-        }
-    }
 }
