@@ -31,5 +31,16 @@ pipeline {
                 }                
             }
         }
+        stage ("push to repository") {
+            steps {
+                 dir("k8s-manifests/astonvilla-app"){
+                        bat "git add astonvilla-deployment.yaml"
+                        bat """
+                        git commit -m "updated version"
+                        git push -u origin master
+                        """
+                }                
+            }
+        }
     }
 }
