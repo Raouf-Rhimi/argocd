@@ -1,0 +1,20 @@
+stage('Update Deployment YAML') {
+  steps {
+    // Clone the GitHub repository
+    git credentialsId: 'github-credentials', url: 'https://github.com/your/repository.git'
+    
+    // Read the deployment.yaml file
+    def deploymentFile = readFile('path/to/deployment.yaml')
+    
+    // Update the image tag
+    def newImageTag = 'new-tag'
+    deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: your-registry/your-image:${newImageTag}")
+    
+    // Write the modified deployment.yaml file
+    writeFile file: 'path/to/deployment.yaml', text: deploymentFile
+    
+    // Commit and push changes
+    git credentialsId: 'github-credentials', url: 'https://github.com/your/repository.git'
+    gitPush()
+  }
+}
