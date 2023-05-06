@@ -14,10 +14,17 @@ pipeline {
                 bat "git clone https://kakachiSensei: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@github.com/kakachiSensei/k8s-manifests.git"
             }
         }
-        stage ("generate docker image") {
+        stage ("update image tag") {
             steps {
                  dir("k8s-manifest"){
-                   bat "tree"
+                   bat "astonvilla-app"
+                   def deploymentFile = readFile('astonvilla-deployment.yaml')
+                   def newImageTag = '1.1.0'
+                   deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/kakachisensei/astonvilla-app:${newImageTag}")
+                   writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
+                   git add .
+                   git commit -m "updated version"
+                   git push -u origin
                 }                
             }
         }
