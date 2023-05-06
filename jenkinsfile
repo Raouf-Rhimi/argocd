@@ -20,10 +20,10 @@ pipeline {
                     script {
                         def deploymentFile = readFile('astonvilla-deployment.yaml')
                         def newImageTag = '1.1.0'
-                        deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/kakachisensei/astonvilla-app:${newImageTag}")
+                        deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/astonvilla-app:${newImageTag}")
                         writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
+                        bat "git add ."
                         bat """
-                        git add .
                         git commit -m "updated version"
                         git push -u origin
                         """
