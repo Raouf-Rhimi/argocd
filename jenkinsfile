@@ -16,9 +16,8 @@ pipeline {
         }
         stage ("update image tag") {
             steps {
-                 dir("k8s-manifests"){
+                 dir("k8s-manifests/astonvilla-app"){
                     script {
-                        bat "cd astonvilla-app"
                         def deploymentFile = readFile('astonvilla-deployment.yaml')
                         def newImageTag = '1.1.0'
                         deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/kakachisensei/astonvilla-app:${newImageTag}")
