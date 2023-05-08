@@ -18,10 +18,11 @@ pipeline {
             steps {
                  dir("k8s-manifests/astonvilla-app"){
                     script {
-                        def deploymentFile = readFile('astonvilla-deployment.yaml')
-                        def newImageTag = '1.1.0'
-                        deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/astonvilla-app:${newImageTag}")
-                        writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
+                        //def deploymentFile = readFile('astonvilla-deployment.yaml')
+                       // def newImageTag = '1.1.0'
+                       // deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/astonvilla-app:${newImageTag}")
+                        powershell -Command "(gc astonvilla-deployment.yaml) -replace 'image:.*$', 'image: kakachisensei/astonvilla-app:${newImageTag}' | Out-File -encoding ASCII test.yaml"
+                       // writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
                         bat 'git add .'
                         bat """
                         git commit -m "version updated"
