@@ -18,7 +18,7 @@ pipeline {
             steps {
                  dir("k8s-manifests/astonvilla-app"){
                     script {
-                        def newImageTag = "1.0.0"
+                        def newImageTag = "1.0.1"
                         bat """
                         powershell -command  "(gc astonvilla-deployment.yaml) -replace 'image: .*', 'image: kakachisensei/astonvilla-app:1.0.0' | Out-File -encoding ASCII astonvilla-deployment.yaml"
                         """
