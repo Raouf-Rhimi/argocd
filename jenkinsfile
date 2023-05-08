@@ -19,7 +19,7 @@ pipeline {
                  dir("k8s-manifests/astonvilla-app"){
                     script {
                         bat """
-                        powershell -command  "(gc astonvilla-deployment.yaml) -replace 'image:.*$', 'image: kakachisensei/astonvilla-app:1.1.0' | Out-File -encoding ASCII astonvilla-deployment.yaml" 
+                        powershell -command  "(gc astonvilla-deployment.yaml) -replace 'image: .*$', 'image: kakachisensei/astonvilla-app:1.0.0' | Out-File -encoding ASCII astonvilla-deployment.yaml"
                         git add .
                         git commit -m "version updated"
                         git push -u origin master
