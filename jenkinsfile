@@ -20,9 +20,7 @@ pipeline {
                     script {
                         //def deploymentFile = readFile('astonvilla-deployment.yaml')
                        // def newImageTag = '1.1.0'
-                       // deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/astonvilla-app:${newImageTag}")
-                        powershell -Command "(gc astonvilla-deployment.yaml) -replace 'image:.*$', 'image: kakachisensei/astonvilla-app:${newImageTag}' | Out-File -encoding ASCII test.yaml"
-                       // writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
+                        bat 'pwsh updateTag.ps1' 
                         bat 'git add .'
                         bat """
                         git commit -m "version updated"
