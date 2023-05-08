@@ -18,9 +18,8 @@ pipeline {
             steps {
                  dir("k8s-manifests/astonvilla-app"){
                     script {
-                        //def deploymentFile = readFile('astonvilla-deployment.yaml')
-                       // def newImageTag = '1.1.0'
-                        bat 'pwsh updateTag.ps1' 
+                        def newImageTag = '1.1.0'
+                        bat 'powershell -command  "(gc astonvilla-deployment.yaml) -replace 'image:.*$', 'image: kakachisensei/astonvilla-app:${newImageTag}' | Out-File -encoding ASCII astonvilla-deployment.yaml"' 
                         bat 'git add .'
                         bat """
                         git commit -m "version updated"
