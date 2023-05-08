@@ -20,7 +20,7 @@ pipeline {
                     script {
                         def newImageTag = "1.0.1"
                         bat """
-                        powershell -command  "(gc astonvilla-deployment.yaml) -replace 'image: .*', 'image: kakachisensei/astonvilla-app:1.0.0' | Out-File -encoding ASCII astonvilla-deployment.yaml"
+                        powershell -command  "(gc astonvilla-deployment.yaml) -replace 'image: .*', 'image: kakachisensei/astonvilla-app:${newImageTag}' | Out-File -encoding ASCII astonvilla-deployment.yaml"
                         """
                         bat """
                          git add .
