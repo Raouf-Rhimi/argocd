@@ -22,9 +22,9 @@ pipeline {
                         def newImageTag = '1.1.0'
                         deploymentFile = deploymentFile.replaceAll(/image:.*$/, "image: kakachisensei/astonvilla-app:${newImageTag}")
                         writeFile file: 'astonvilla-deployment.yaml', text: deploymentFile
-                        bat "git add astonvilla-deployment.yaml"
-                        bat "git commit -m 'version updated'"
-                        bat "git push -u origin master"
+                        bat 'git add astonvilla-deployment.yaml'
+                        bat 'git commit -m "version updated"'
+                        bat 'git push -u origin master'
                     }
                 }                
             }
